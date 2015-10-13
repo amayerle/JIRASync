@@ -18,6 +18,9 @@ namespace JIRASync
         {
             string p = Functions.ReadDocumentProperties("MspJiraAddInProjectSettings.Mappings.DefaultProjectKey");
             JiraProjectKeyList.Text = p != null ? p : "";
+
+            string CIP = Functions.ReadDocumentProperties("CeptahInstallPath");
+            CeptahInstallPath.Text = CIP != null ? CIP : @"C:\Program Files (x86)\Ceptah\Msp JIRA Bridge\";
         }
 
         private void SaveConfigButton_Click(object sender, EventArgs e)
@@ -25,6 +28,10 @@ namespace JIRASync
             string[] i = JiraProjectKeyList.SelectedItem != null ? JiraProjectKeyList.SelectedItem.ToString().Split(' ') : JiraProjectKeyList.Text.Split(' ');
             string ii = i[i.Length - 1].ToString();
             Functions.SetDocumentProperties("MspJiraAddInProjectSettings.Mappings.DefaultProjectKey", ii);
+            
+            Functions.SetDocumentProperties("CeptahInstallPath", CeptahInstallPath.Text);
+
+            this.Close();
         }
 
         private void JiraProjectKeyList_DropDown(object sender, EventArgs e)
