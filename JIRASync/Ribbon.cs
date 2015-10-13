@@ -13,7 +13,7 @@ namespace JIRASync
         private void RibbonImportButton_Click(object sender, RibbonControlEventArgs e)
         {
             string PrFullName = Globals.ThisAddIn.Application.ActiveProject.FullName;
-            string CeptahProjectKey = Functions.ReadDocumentProperties("MspJiraAddInProjectSettings.Mappings.DefaultProjectKey");
+            string CeptahProjectKey = Functions.ReadDocumentProperties(Params.CEPTAH_PROJECT_KEY_PROP);
 
             JIRASync.Functions.RunCeptah("i " + PrFullName + " /P:" + CeptahProjectKey);
         }

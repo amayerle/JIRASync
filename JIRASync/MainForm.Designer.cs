@@ -30,7 +30,7 @@
         {
             this.SaveConfigButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.CeptahInstallPath = new System.Windows.Forms.TextBox();
+            this.CeptahInstallPathTextBox = new System.Windows.Forms.TextBox();
             this.JiraProjectKeyList = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -56,12 +56,12 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Код проекта";
             // 
-            // CeptahInstallPath
+            // CeptahInstallPathTextBox
             // 
-            this.CeptahInstallPath.Location = new System.Drawing.Point(119, 30);
-            this.CeptahInstallPath.Name = "CeptahInstallPath";
-            this.CeptahInstallPath.Size = new System.Drawing.Size(172, 20);
-            this.CeptahInstallPath.TabIndex = 6;
+            this.CeptahInstallPathTextBox.Location = new System.Drawing.Point(119, 30);
+            this.CeptahInstallPathTextBox.Name = "CeptahInstallPathTextBox";
+            this.CeptahInstallPathTextBox.Size = new System.Drawing.Size(172, 20);
+            this.CeptahInstallPathTextBox.TabIndex = 6;
             // 
             // JiraProjectKeyList
             // 
@@ -84,7 +84,7 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.CeptahInstallPath);
+            this.panel1.Controls.Add(this.CeptahInstallPathTextBox);
             this.panel1.Controls.Add(this.SaveConfigButton);
             this.panel1.Controls.Add(this.JiraProjectKeyList);
             this.panel1.Controls.Add(this.label2);
@@ -113,7 +113,7 @@
 
         private System.Windows.Forms.Button SaveConfigButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox CeptahInstallPath;
+        private System.Windows.Forms.TextBox CeptahInstallPathTextBox;
         private System.Windows.Forms.ComboBox JiraProjectKeyList;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;

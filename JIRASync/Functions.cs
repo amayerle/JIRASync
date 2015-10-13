@@ -8,13 +8,15 @@ namespace JIRASync
     {
         public static string RunCeptah(string command)
         {
-            string ExePath = ReadDocumentProperties("CeptahInstallPath");
-            const string ex1 = @"C:\Program Files (x86)\Ceptah\Msp JIRA Bridge\";
-            
+            string ExePath = ReadDocumentProperties(Params.CEPTAH_INSTALL_PATH_PROP);
+            if (ExePath==null)
+            {
+                ExePath = Params.DEFAULT_CEPTAH_INSTALL_PATH;
+            }
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.CreateNoWindow = false;
             startInfo.UseShellExecute = false;
-            startInfo.FileName = ex1 + "mspjb.exe";
+            startInfo.FileName = ExePath + "mspjb.exe";
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
             startInfo.Arguments = command;
             try
