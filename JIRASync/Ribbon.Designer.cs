@@ -37,10 +37,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ribbon));
             this.tab1 = this.Factory.CreateRibbonTab();
             this.JIRASyncGroup = this.Factory.CreateRibbonGroup();
-            this.RibbonImportButton = this.Factory.CreateRibbonButton();
-            this.RibbonFromJIRAButton = this.Factory.CreateRibbonButton();
-            this.RibbonToJIRAButton = this.Factory.CreateRibbonButton();
+            this.SyncJIRAButton = this.Factory.CreateRibbonButton();
             this.RibbonJIRAConfigButton = this.Factory.CreateRibbonButton();
+            this.AssignRibbon = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.JIRASyncGroup.SuspendLayout();
             this.SuspendLayout();
@@ -53,39 +52,20 @@
             // 
             // JIRASyncGroup
             // 
-            this.JIRASyncGroup.Items.Add(this.RibbonImportButton);
-            this.JIRASyncGroup.Items.Add(this.RibbonFromJIRAButton);
-            this.JIRASyncGroup.Items.Add(this.RibbonToJIRAButton);
+            this.JIRASyncGroup.Items.Add(this.SyncJIRAButton);
             this.JIRASyncGroup.Items.Add(this.RibbonJIRAConfigButton);
+            this.JIRASyncGroup.Items.Add(this.AssignRibbon);
             this.JIRASyncGroup.Label = "Синхронизация";
             this.JIRASyncGroup.Name = "JIRASyncGroup";
             // 
-            // RibbonImportButton
+            // SyncJIRAButton
             // 
-            this.RibbonImportButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.RibbonImportButton.Image = ((System.Drawing.Image)(resources.GetObject("RibbonImportButton.Image")));
-            this.RibbonImportButton.Label = "Импорт";
-            this.RibbonImportButton.Name = "RibbonImportButton";
-            this.RibbonImportButton.ShowImage = true;
-            this.RibbonImportButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.RibbonImportButton_Click);
-            // 
-            // RibbonFromJIRAButton
-            // 
-            this.RibbonFromJIRAButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.RibbonFromJIRAButton.Image = ((System.Drawing.Image)(resources.GetObject("RibbonFromJIRAButton.Image")));
-            this.RibbonFromJIRAButton.Label = "Из JIRA";
-            this.RibbonFromJIRAButton.Name = "RibbonFromJIRAButton";
-            this.RibbonFromJIRAButton.ShowImage = true;
-            this.RibbonFromJIRAButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.RibbonFromJIRAButton_Click);
-            // 
-            // RibbonToJIRAButton
-            // 
-            this.RibbonToJIRAButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.RibbonToJIRAButton.Image = ((System.Drawing.Image)(resources.GetObject("RibbonToJIRAButton.Image")));
-            this.RibbonToJIRAButton.Label = "В JIRA";
-            this.RibbonToJIRAButton.Name = "RibbonToJIRAButton";
-            this.RibbonToJIRAButton.ShowImage = true;
-            this.RibbonToJIRAButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.RibbonToJIRAButton_Click);
+            this.SyncJIRAButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.SyncJIRAButton.Image = ((System.Drawing.Image)(resources.GetObject("SyncJIRAButton.Image")));
+            this.SyncJIRAButton.Label = "Синхронизировать";
+            this.SyncJIRAButton.Name = "SyncJIRAButton";
+            this.SyncJIRAButton.ShowImage = true;
+            this.SyncJIRAButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.SyncJIRAButton_Click);
             // 
             // RibbonJIRAConfigButton
             // 
@@ -95,6 +75,11 @@
             this.RibbonJIRAConfigButton.Name = "RibbonJIRAConfigButton";
             this.RibbonJIRAConfigButton.ShowImage = true;
             this.RibbonJIRAConfigButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.RibbonJIRAConfigButton_Click);
+            // 
+            // AssignRibbon
+            // 
+            this.AssignRibbon.Label = "button1";
+            this.AssignRibbon.Name = "AssignRibbon";
             // 
             // Ribbon
             // 
@@ -115,9 +100,8 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup JIRASyncGroup;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton RibbonJIRAConfigButton;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton RibbonImportButton;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton RibbonFromJIRAButton;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton RibbonToJIRAButton;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton SyncJIRAButton;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton AssignRibbon;
     }
 
     partial class ThisRibbonCollection

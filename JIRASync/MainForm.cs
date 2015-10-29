@@ -40,7 +40,7 @@ namespace JIRASync
             string url = "";
             try
             {
-                using (RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Ceptah\\MspJiraBridge"))
+                using (RegistryKey key = Registry.CurrentUser.OpenSubKey(Params.CEPTAH_CONN_REG_KEY))
                 {
                     if (key != null)
                     {
@@ -59,7 +59,7 @@ namespace JIRASync
             }
 
             JiraProjectKeyList.Items.Clear();
-            WebRequest request = WebRequest.Create(url);
+            WebRequest request = WebRequest.Create(url+"/rest/api/2/project");
             string upass = Functions.Base64Encode("pm:pm");
             request.Headers.Add("Authorization", "Basic " + upass);
             request.ContentType = "application/json";
@@ -77,6 +77,11 @@ namespace JIRASync
                 item.Value = l["key"].ToString();
                 JiraProjectKeyList.Items.Add(item);
             }
+        }
+
+        private void JiraProjectKeyList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
     public class ComboboxItem

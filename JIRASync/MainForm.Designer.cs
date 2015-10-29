@@ -71,6 +71,7 @@
             this.JiraProjectKeyList.Size = new System.Drawing.Size(172, 21);
             this.JiraProjectKeyList.TabIndex = 8;
             this.JiraProjectKeyList.DropDown += new System.EventHandler(this.JiraProjectKeyList_DropDown);
+            this.JiraProjectKeyList.SelectedIndexChanged += new System.EventHandler(this.JiraProjectKeyList_SelectedIndexChanged);
             // 
             // label2
             // 

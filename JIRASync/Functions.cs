@@ -16,11 +16,13 @@ namespace JIRASync
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.CreateNoWindow = false;
             startInfo.UseShellExecute = false;
+            startInfo.RedirectStandardOutput = true;
             startInfo.FileName = ExePath + "mspjb.exe";
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
             startInfo.Arguments = command;
             try
             {
+                
                 using (Process exeProcess = Process.Start(startInfo))
                 {
                     //exeProcess.Start();
