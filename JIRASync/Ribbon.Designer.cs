@@ -39,7 +39,7 @@
             this.JIRASyncGroup = this.Factory.CreateRibbonGroup();
             this.SyncJIRAButton = this.Factory.CreateRibbonButton();
             this.RibbonJIRAConfigButton = this.Factory.CreateRibbonButton();
-            this.AssignRibbon = this.Factory.CreateRibbonButton();
+            this.ExportRibbon = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.JIRASyncGroup.SuspendLayout();
             this.SuspendLayout();
@@ -53,8 +53,8 @@
             // JIRASyncGroup
             // 
             this.JIRASyncGroup.Items.Add(this.SyncJIRAButton);
+            this.JIRASyncGroup.Items.Add(this.ExportRibbon);
             this.JIRASyncGroup.Items.Add(this.RibbonJIRAConfigButton);
-            this.JIRASyncGroup.Items.Add(this.AssignRibbon);
             this.JIRASyncGroup.Label = "Синхронизация";
             this.JIRASyncGroup.Name = "JIRASyncGroup";
             // 
@@ -76,10 +76,14 @@
             this.RibbonJIRAConfigButton.ShowImage = true;
             this.RibbonJIRAConfigButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.RibbonJIRAConfigButton_Click);
             // 
-            // AssignRibbon
+            // ExportRibbon
             // 
-            this.AssignRibbon.Label = "button1";
-            this.AssignRibbon.Name = "AssignRibbon";
+            this.ExportRibbon.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.ExportRibbon.Image = ((System.Drawing.Image)(resources.GetObject("ExportRibbon.Image")));
+            this.ExportRibbon.Label = "Экспорт";
+            this.ExportRibbon.Name = "ExportRibbon";
+            this.ExportRibbon.ShowImage = true;
+            this.ExportRibbon.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ExportRibbon_Click);
             // 
             // Ribbon
             // 
@@ -101,7 +105,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup JIRASyncGroup;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton RibbonJIRAConfigButton;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton SyncJIRAButton;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton AssignRibbon;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton ExportRibbon;
     }
 
     partial class ThisRibbonCollection

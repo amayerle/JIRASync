@@ -1,15 +1,20 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace JIRASync
 {
     class Functions
     {
+        public static string CeptahOutput = "";
         public static string RunCeptah(string command)
         {
+            CeptahOutput = "";
+
             string ExePath = ReadDocumentProperties(Params.CEPTAH_INSTALL_PATH_PROP);
-            if (ExePath==null)
+            if (ExePath == null)
             {
                 ExePath = Params.DEFAULT_CEPTAH_INSTALL_PATH;
             }
@@ -19,21 +24,60 @@ namespace JIRASync
             startInfo.RedirectStandardOutput = true;
             startInfo.FileName = ExePath + "mspjb.exe";
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            startInfo.Arguments = command;
-            try
+            startInfo.Arguments = command + " /U:" + Functions.ReadDocumentProperties(Params.USER_NAME_PROP) + " /PW:"+ Functions.ReadDocumentProperties(Params.USER_PASS_PROP);
+            
+            using (Process pp = new Process())
             {
-                
-                using (Process exeProcess = Process.Start(startInfo))
-                {
-                    //exeProcess.Start();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                pp.StartInfo = startInfo;
+                pp.Start();
+                pp.BeginOutputReadLine();
+                pp.OutputDataReceived += P_OutputDataReceived;
             }
             return "";
         }
+
+        internal static string GetRegistryValue(string path, string prop)
+        {
+            string v = "";
+            try
+            {
+                using (RegistryKey key = Registry.CurrentUser.OpenSubKey(path))
+                {
+                    if (key != null)
+                    {
+                        Object o = key.GetValue(prop);
+                        if (o != null)
+                        {
+                            v = o.ToString();
+                        }
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return v;
+        }
+
+        private static void P_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            CeptahOutput += e.Data + "\r\n";
+            if (e.Data!=null)
+            {
+
+                if (e.Data.Contains("Command-line tool finished"))
+                {
+                    MessageBox.Show(CeptahOutput);
+                    Ribbon.RenewTasks();
+                }
+                else
+                {
+                    //MessageBox.Show(CeptahOutput);
+                }
+            }
+        }
+
         public static string ReadDocumentProperties(string propName)
         {
             Microsoft.Office.Core.DocumentProperties properties;
@@ -47,6 +91,24 @@ namespace JIRASync
                 }
             }
             return null;
+        }
+        public static void UpdateXml(string file, string pr)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(file);
+            XmlNode root = doc.DocumentElement;
+            XmlNode map = root.FirstChild;
+            XmlNode prNode = null;
+            foreach (XmlNode p in map.ChildNodes)
+            {
+                if (p.Name == "DefaultProjectKey")
+                {
+                    prNode = p;
+                    break;
+                }
+            }
+            prNode.InnerText = Functions.ReadDocumentProperties(pr);
+            doc.Save(file);
         }
         public static string Base64Encode(string plainText)
         {

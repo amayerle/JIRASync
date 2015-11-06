@@ -17,8 +17,12 @@ namespace JIRASync
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            string p = Functions.ReadDocumentProperties(Params.CEPTAH_PROJECT_KEY_PROP);
+            string p = Functions.ReadDocumentProperties(Params.JIRA_PROJECT_KEY);
             JiraProjectKeyList.Text = p != null ? p : "";
+            p = Functions.ReadDocumentProperties(Params.USER_NAME_PROP);
+            UserTextBox.Text = p != null ? p : "";
+            p = Functions.ReadDocumentProperties(Params.USER_PASS_PROP);
+            PassTextBox.Text = p != null ? p : "";
 
             string CIP = Functions.ReadDocumentProperties(Params.CEPTAH_INSTALL_PATH_PROP);
             CeptahInstallPathTextBox.Text = CIP != null ? CIP : Params.DEFAULT_CEPTAH_INSTALL_PATH;
@@ -28,8 +32,10 @@ namespace JIRASync
         {
             string[] i = JiraProjectKeyList.SelectedItem != null ? JiraProjectKeyList.SelectedItem.ToString().Split(' ') : JiraProjectKeyList.Text.Split(' ');
             string ii = i[i.Length - 1].ToString();
-            Functions.SetDocumentProperties(Params.CEPTAH_PROJECT_KEY_PROP, ii);
-            
+            Functions.SetDocumentProperties(Params.JIRA_PROJECT_KEY, ii);
+            Functions.SetDocumentProperties(Params.USER_NAME_PROP, UserTextBox.Text);
+            Functions.SetDocumentProperties(Params.USER_PASS_PROP, PassTextBox.Text);
+
             Functions.SetDocumentProperties(Params.CEPTAH_INSTALL_PATH_PROP, CeptahInstallPathTextBox.Text);
 
             this.Close();
@@ -37,26 +43,7 @@ namespace JIRASync
 
         private void JiraProjectKeyList_DropDown(object sender, EventArgs e)
         {
-            string url = "";
-            try
-            {
-                using (RegistryKey key = Registry.CurrentUser.OpenSubKey(Params.CEPTAH_CONN_REG_KEY))
-                {
-                    if (key != null)
-                    {
-                        Object o = key.GetValue("JiraUrl");
-                        if (o != null)
-                        {
-                            url = o.ToString();
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return;
-            }
+            string url = Functions.GetRegistryValue(Params.CEPTAH_CONN_REG_KEY, "JiraUrl");
 
             JiraProjectKeyList.Items.Clear();
             WebRequest request = WebRequest.Create(url+"/rest/api/2/project");
