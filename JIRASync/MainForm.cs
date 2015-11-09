@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -23,7 +22,6 @@ namespace JIRASync
             UserTextBox.Text = p != null ? p : "";
             p = Functions.ReadDocumentProperties(Params.USER_PASS_PROP);
             PassTextBox.Text = p != null ? p : "";
-
             string CIP = Functions.ReadDocumentProperties(Params.CEPTAH_INSTALL_PATH_PROP);
             CeptahInstallPathTextBox.Text = CIP != null ? CIP : Params.DEFAULT_CEPTAH_INSTALL_PATH;
         }
@@ -38,7 +36,7 @@ namespace JIRASync
 
             Functions.SetDocumentProperties(Params.CEPTAH_INSTALL_PATH_PROP, CeptahInstallPathTextBox.Text);
 
-            this.Close();
+            Close();
         }
 
         private void JiraProjectKeyList_DropDown(object sender, EventArgs e)
@@ -47,7 +45,7 @@ namespace JIRASync
 
             JiraProjectKeyList.Items.Clear();
             WebRequest request = WebRequest.Create(url+"/rest/api/2/project");
-            string upass = Functions.Base64Encode("pm:pm");
+            string upass = Functions.Base64Encode(Functions.ReadDocumentProperties(Params.USER_NAME_PROP) + ":"+ Functions.ReadDocumentProperties(Params.USER_PASS_PROP));
             request.Headers.Add("Authorization", "Basic " + upass);
             request.ContentType = "application/json";
             WebResponse response = request.GetResponse();

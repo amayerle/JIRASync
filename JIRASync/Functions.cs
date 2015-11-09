@@ -24,7 +24,7 @@ namespace JIRASync
             startInfo.RedirectStandardOutput = true;
             startInfo.FileName = ExePath + "mspjb.exe";
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            startInfo.Arguments = command + " /U:" + Functions.ReadDocumentProperties(Params.USER_NAME_PROP) + " /PW:"+ Functions.ReadDocumentProperties(Params.USER_PASS_PROP);
+            startInfo.Arguments = command + " /U:" + ReadDocumentProperties(Params.USER_NAME_PROP) + " /PW:"+ ReadDocumentProperties(Params.USER_PASS_PROP);
             
             using (Process pp = new Process())
             {
@@ -45,7 +45,7 @@ namespace JIRASync
                 {
                     if (key != null)
                     {
-                        Object o = key.GetValue(prop);
+                        object o = key.GetValue(prop);
                         if (o != null)
                         {
                             v = o.ToString();
@@ -53,7 +53,7 @@ namespace JIRASync
                     }
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -107,7 +107,7 @@ namespace JIRASync
                     break;
                 }
             }
-            prNode.InnerText = Functions.ReadDocumentProperties(pr);
+            prNode.InnerText = ReadDocumentProperties(pr);
             doc.Save(file);
         }
         public static string Base64Encode(string plainText)
@@ -119,7 +119,7 @@ namespace JIRASync
         {
             Microsoft.Office.Core.DocumentProperties prop;
             prop = Globals.ThisAddIn.Application.ActiveProject.CustomDocumentProperties;
-            if (Functions.ReadDocumentProperties(PropName) != null)
+            if (ReadDocumentProperties(PropName) != null)
             {
                 prop[PropName].Delete();
             }

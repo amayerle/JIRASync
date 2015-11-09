@@ -48,7 +48,7 @@ namespace JIRASync
             }
             string PrFullName = Globals.ThisAddIn.Application.ActiveProject.FullName;
             MessageBox.Show(PrFullName);
-            Functions.RunCeptah(" synchronize \"" + PrFullName + "\" /S:C:\\Ceptah\\Sync.xml");
+            Functions.RunCeptah("s \"" + PrFullName + "\" /S:C:\\Ceptah\\Sync.xml");
         }
         private bool HasAssignedSubTask(Task t)
         {
