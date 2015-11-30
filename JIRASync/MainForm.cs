@@ -24,6 +24,8 @@ namespace JIRASync
             PassTextBox.Text = p != null ? p : "";
             string CIP = Functions.ReadDocumentProperties(Params.CEPTAH_INSTALL_PATH_PROP);
             CeptahInstallPathTextBox.Text = CIP != null ? CIP : Params.DEFAULT_CEPTAH_INSTALL_PATH;
+            string jiraServerURL = Functions.GetRegistryValue(Params.CEPTAH_CONN_REG_KEY, "JiraUrl");
+            JIRAServerUrlText.Text = jiraServerURL != null ? jiraServerURL : "";
         }
 
         private void SaveConfigButton_Click(object sender, EventArgs e)
@@ -33,9 +35,8 @@ namespace JIRASync
             Functions.SetDocumentProperties(Params.JIRA_PROJECT_KEY, ii);
             Functions.SetDocumentProperties(Params.USER_NAME_PROP, UserTextBox.Text);
             Functions.SetDocumentProperties(Params.USER_PASS_PROP, PassTextBox.Text);
-
             Functions.SetDocumentProperties(Params.CEPTAH_INSTALL_PATH_PROP, CeptahInstallPathTextBox.Text);
-
+            Functions.SetRegistryValue("HKEY_CURRENT_USER\\"+Params.CEPTAH_CONN_REG_KEY, "JiraURL", JIRAServerUrlText.Text, Microsoft.Win32.RegistryValueKind.DWord);
             Close();
         }
 
@@ -62,11 +63,6 @@ namespace JIRASync
                 item.Value = l["key"].ToString();
                 JiraProjectKeyList.Items.Add(item);
             }
-        }
-
-        private void JiraProjectKeyList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
     public class ComboboxItem

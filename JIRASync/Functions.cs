@@ -24,8 +24,8 @@ namespace JIRASync
             startInfo.RedirectStandardOutput = true;
             startInfo.FileName = ExePath + "mspjb.exe";
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            startInfo.Arguments = command + " /U:" + ReadDocumentProperties(Params.USER_NAME_PROP) + " /PW:"+ ReadDocumentProperties(Params.USER_PASS_PROP);
-            
+            startInfo.Arguments = command + " /U:" + ReadDocumentProperties(Params.USER_NAME_PROP) + " /PW:" + ReadDocumentProperties(Params.USER_PASS_PROP);
+
             using (Process pp = new Process())
             {
                 pp.StartInfo = startInfo;
@@ -59,11 +59,15 @@ namespace JIRASync
             }
             return v;
         }
+        internal static void SetRegistryValue(string path, string name, string value, RegistryValueKind type)
+        {
+            Registry.SetValue(path, name, value);
+        }
 
         private static void P_OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
             CeptahOutput += e.Data + "\r\n";
-            if (e.Data!=null)
+            if (e.Data != null)
             {
 
                 if (e.Data.Contains("Command-line tool finished"))

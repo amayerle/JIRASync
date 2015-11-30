@@ -47,7 +47,6 @@ namespace JIRASync
                 }
             }
             string PrFullName = Globals.ThisAddIn.Application.ActiveProject.FullName;
-            MessageBox.Show(PrFullName);
             Functions.RunCeptah("s \"" + PrFullName + "\" /S:C:\\Ceptah\\Sync.xml");
         }
         private bool HasAssignedSubTask(Task t)
@@ -81,6 +80,14 @@ namespace JIRASync
 
         private void ExportRibbon_Click(object sender, RibbonControlEventArgs e)
         {
+            foreach (Task t in Globals.ThisAddIn.Application.ActiveProject.Tasks)
+            {
+                if (t.Text10 == "SKIP" || t.Text10 == "")
+                {
+                    string[] key = t.HyperlinkHREF.Split('/');
+                    t.Text10 = key[key.Length - 1];
+                }
+            }
             if (Functions.ReadDocumentProperties(Params.JIRA_PROJECT_KEY)==null)
             {
                 MessageBox.Show("Не указан код проекта");

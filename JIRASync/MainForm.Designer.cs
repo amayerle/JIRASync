@@ -34,16 +34,18 @@
             this.JiraProjectKeyList = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.PassLabel = new System.Windows.Forms.Label();
-            this.UserTextBox = new System.Windows.Forms.TextBox();
+            this.JIRAServerURLLabel = new System.Windows.Forms.Label();
+            this.JIRAServerUrlText = new System.Windows.Forms.TextBox();
             this.PassTextBox = new System.Windows.Forms.TextBox();
+            this.UserTextBox = new System.Windows.Forms.TextBox();
+            this.PassLabel = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // SaveConfigButton
             // 
-            this.SaveConfigButton.Location = new System.Drawing.Point(203, 115);
+            this.SaveConfigButton.Location = new System.Drawing.Point(203, 160);
             this.SaveConfigButton.Name = "SaveConfigButton";
             this.SaveConfigButton.Size = new System.Drawing.Size(88, 30);
             this.SaveConfigButton.TabIndex = 0;
@@ -75,7 +77,6 @@
             this.JiraProjectKeyList.Size = new System.Drawing.Size(172, 21);
             this.JiraProjectKeyList.TabIndex = 8;
             this.JiraProjectKeyList.DropDown += new System.EventHandler(this.JiraProjectKeyList_DropDown);
-            this.JiraProjectKeyList.SelectedIndexChanged += new System.EventHandler(this.JiraProjectKeyList_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -88,6 +89,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.JIRAServerURLLabel);
+            this.panel1.Controls.Add(this.JIRAServerUrlText);
             this.panel1.Controls.Add(this.PassTextBox);
             this.panel1.Controls.Add(this.UserTextBox);
             this.panel1.Controls.Add(this.PassLabel);
@@ -99,17 +102,38 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(294, 148);
+            this.panel1.Size = new System.Drawing.Size(294, 193);
             this.panel1.TabIndex = 10;
             // 
-            // label3
+            // JIRAServerURLLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 60);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(80, 13);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Пользователь";
+            this.JIRAServerURLLabel.AutoSize = true;
+            this.JIRAServerURLLabel.Location = new System.Drawing.Point(3, 114);
+            this.JIRAServerURLLabel.Name = "JIRAServerURLLabel";
+            this.JIRAServerURLLabel.Size = new System.Drawing.Size(55, 13);
+            this.JIRAServerURLLabel.TabIndex = 15;
+            this.JIRAServerURLLabel.Text = "JIRA URL";
+            // 
+            // JIRAServerUrlText
+            // 
+            this.JIRAServerUrlText.Location = new System.Drawing.Point(119, 111);
+            this.JIRAServerUrlText.Name = "JIRAServerUrlText";
+            this.JIRAServerUrlText.Size = new System.Drawing.Size(172, 20);
+            this.JIRAServerUrlText.TabIndex = 14;
+            // 
+            // PassTextBox
+            // 
+            this.PassTextBox.Location = new System.Drawing.Point(119, 84);
+            this.PassTextBox.Name = "PassTextBox";
+            this.PassTextBox.Size = new System.Drawing.Size(172, 20);
+            this.PassTextBox.TabIndex = 13;
+            // 
+            // UserTextBox
+            // 
+            this.UserTextBox.Location = new System.Drawing.Point(119, 57);
+            this.UserTextBox.Name = "UserTextBox";
+            this.UserTextBox.Size = new System.Drawing.Size(172, 20);
+            this.UserTextBox.TabIndex = 12;
             // 
             // PassLabel
             // 
@@ -120,25 +144,20 @@
             this.PassLabel.TabIndex = 11;
             this.PassLabel.Text = "Пароль";
             // 
-            // UserTextBox
+            // label3
             // 
-            this.UserTextBox.Location = new System.Drawing.Point(119, 57);
-            this.UserTextBox.Name = "UserTextBox";
-            this.UserTextBox.Size = new System.Drawing.Size(172, 20);
-            this.UserTextBox.TabIndex = 12;
-            // 
-            // PassTextBox
-            // 
-            this.PassTextBox.Location = new System.Drawing.Point(119, 84);
-            this.PassTextBox.Name = "PassTextBox";
-            this.PassTextBox.Size = new System.Drawing.Size(172, 20);
-            this.PassTextBox.TabIndex = 13;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 60);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(80, 13);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Пользователь";
             // 
             // ConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(318, 172);
+            this.ClientSize = new System.Drawing.Size(318, 217);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "ConfigForm";
@@ -162,5 +181,7 @@
         private System.Windows.Forms.TextBox UserTextBox;
         private System.Windows.Forms.Label PassLabel;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox JIRAServerUrlText;
+        private System.Windows.Forms.Label JIRAServerURLLabel;
     }
 }
