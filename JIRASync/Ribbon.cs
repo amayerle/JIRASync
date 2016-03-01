@@ -1,9 +1,6 @@
 ﻿using Microsoft.Office.Interop.MSProject;
 using Microsoft.Office.Tools.Ribbon;
-using Microsoft.Win32;
-using System;
 using System.Windows.Forms;
-using System.Xml;
 
 namespace JIRASync
 {
@@ -22,14 +19,15 @@ namespace JIRASync
 
         private void SyncJIRAButton_Click(object sender, RibbonControlEventArgs e)
         {
+
             if (Functions.ReadDocumentProperties(Params.JIRA_PROJECT_KEY) == null)
             {
                 MessageBox.Show("Не указан код проекта");
                 return;
             }
             Functions.UpdateXml("C:\\Ceptah\\Sync.xml", Params.JIRA_PROJECT_KEY);
-            string User = Functions.GetRegistryValue(Params.CEPTAH_CONN_REG_KEY, "User");
-            
+            string User = Functions.ReadDocumentProperties(Params.USER_NAME_PROP);
+
             foreach (Task t in Globals.ThisAddIn.Application.ActiveProject.Tasks)
             {
                 if (HasAssignedSubTask(t) && t.HyperlinkHREF != "")
@@ -47,7 +45,7 @@ namespace JIRASync
                 }
             }
             string PrFullName = Globals.ThisAddIn.Application.ActiveProject.FullName;
-            Functions.RunCeptah("s \"" + PrFullName + "\" /S:C:\\Ceptah\\Sync.xml");
+            //Functions.RunCeptah("s \"" + PrFullName + "\" /S:C:\\Ceptah\\Sync.xml");
         }
         private bool HasAssignedSubTask(Task t)
         {
@@ -80,22 +78,26 @@ namespace JIRASync
 
         private void ExportRibbon_Click(object sender, RibbonControlEventArgs e)
         {
-            foreach (Task t in Globals.ThisAddIn.Application.ActiveProject.Tasks)
-            {
-                if (t.Text10 == "SKIP" || t.Text10 == "")
-                {
-                    string[] key = t.HyperlinkHREF.Split('/');
-                    t.Text10 = key[key.Length - 1];
-                }
-            }
-            if (Functions.ReadDocumentProperties(Params.JIRA_PROJECT_KEY)==null)
-            {
-                MessageBox.Show("Не указан код проекта");
-                return;
-            }
-            Functions.UpdateXml("C:\\Ceptah\\Export.xml", Params.JIRA_PROJECT_KEY);
-            string PrFullName = Globals.ThisAddIn.Application.ActiveProject.FullName;
-            Functions.RunCeptah("s \"" + PrFullName + "\" /S:C:\\Ceptah\\Export.xml");
+            SyncResults sr = new SyncResults();
+            sr.Show();
+        }
+
+        private void ChooseUserButton_Click(object sender, RibbonControlEventArgs e)
+        {
+            ChooseUser CU = new ChooseUser();
+            CU.Show();
+        }
+
+        private void button1_Click(object sender, RibbonControlEventArgs e)
+        {
+
+            
+        }
+
+        private void CreateProjectButtonRibbon_Click(object sender, RibbonControlEventArgs e)
+        {
+            CreateProject CP = new CreateProject();
+            CP.Show();
         }
     }
 }

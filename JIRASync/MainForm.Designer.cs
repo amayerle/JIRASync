@@ -36,19 +36,18 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.JIRAServerURLLabel = new System.Windows.Forms.Label();
             this.JIRAServerUrlText = new System.Windows.Forms.TextBox();
-            this.PassTextBox = new System.Windows.Forms.TextBox();
             this.UserTextBox = new System.Windows.Forms.TextBox();
-            this.PassLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.RefreshProjectWorker = new System.ComponentModel.BackgroundWorker();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // SaveConfigButton
             // 
-            this.SaveConfigButton.Location = new System.Drawing.Point(203, 160);
+            this.SaveConfigButton.Location = new System.Drawing.Point(266, 205);
             this.SaveConfigButton.Name = "SaveConfigButton";
-            this.SaveConfigButton.Size = new System.Drawing.Size(88, 30);
-            this.SaveConfigButton.TabIndex = 0;
+            this.SaveConfigButton.Size = new System.Drawing.Size(88, 29);
+            this.SaveConfigButton.TabIndex = 6;
             this.SaveConfigButton.Text = "Сохранить";
             this.SaveConfigButton.UseVisualStyleBackColor = true;
             this.SaveConfigButton.Click += new System.EventHandler(this.SaveConfigButton_Click);
@@ -56,7 +55,8 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 6);
+            this.label1.Enabled = false;
+            this.label1.Location = new System.Drawing.Point(3, 100);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 2;
@@ -64,24 +64,27 @@
             // 
             // CeptahInstallPathTextBox
             // 
-            this.CeptahInstallPathTextBox.Location = new System.Drawing.Point(119, 30);
+            this.CeptahInstallPathTextBox.Location = new System.Drawing.Point(3, 164);
             this.CeptahInstallPathTextBox.Name = "CeptahInstallPathTextBox";
-            this.CeptahInstallPathTextBox.Size = new System.Drawing.Size(172, 20);
-            this.CeptahInstallPathTextBox.TabIndex = 6;
+            this.CeptahInstallPathTextBox.Size = new System.Drawing.Size(351, 20);
+            this.CeptahInstallPathTextBox.TabIndex = 5;
+            this.CeptahInstallPathTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnter);
             // 
             // JiraProjectKeyList
             // 
             this.JiraProjectKeyList.FormattingEnabled = true;
-            this.JiraProjectKeyList.Location = new System.Drawing.Point(119, 3);
+            this.JiraProjectKeyList.Location = new System.Drawing.Point(3, 120);
             this.JiraProjectKeyList.Name = "JiraProjectKeyList";
-            this.JiraProjectKeyList.Size = new System.Drawing.Size(172, 21);
-            this.JiraProjectKeyList.TabIndex = 8;
+            this.JiraProjectKeyList.Size = new System.Drawing.Size(351, 21);
+            this.JiraProjectKeyList.TabIndex = 4;
             this.JiraProjectKeyList.DropDown += new System.EventHandler(this.JiraProjectKeyList_DropDown);
+            this.JiraProjectKeyList.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnter);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 33);
+            this.label2.Enabled = false;
+            this.label2.Location = new System.Drawing.Point(3, 144);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(116, 13);
             this.label2.TabIndex = 9;
@@ -91,9 +94,7 @@
             // 
             this.panel1.Controls.Add(this.JIRAServerURLLabel);
             this.panel1.Controls.Add(this.JIRAServerUrlText);
-            this.panel1.Controls.Add(this.PassTextBox);
             this.panel1.Controls.Add(this.UserTextBox);
-            this.panel1.Controls.Add(this.PassLabel);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.CeptahInstallPathTextBox);
@@ -102,13 +103,14 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(294, 193);
+            this.panel1.Size = new System.Drawing.Size(357, 237);
             this.panel1.TabIndex = 10;
             // 
             // JIRAServerURLLabel
             // 
             this.JIRAServerURLLabel.AutoSize = true;
-            this.JIRAServerURLLabel.Location = new System.Drawing.Point(3, 114);
+            this.JIRAServerURLLabel.Enabled = false;
+            this.JIRAServerURLLabel.Location = new System.Drawing.Point(3, 57);
             this.JIRAServerURLLabel.Name = "JIRAServerURLLabel";
             this.JIRAServerURLLabel.Size = new System.Drawing.Size(55, 13);
             this.JIRAServerURLLabel.TabIndex = 15;
@@ -116,48 +118,40 @@
             // 
             // JIRAServerUrlText
             // 
-            this.JIRAServerUrlText.Location = new System.Drawing.Point(119, 111);
+            this.JIRAServerUrlText.Location = new System.Drawing.Point(3, 77);
             this.JIRAServerUrlText.Name = "JIRAServerUrlText";
-            this.JIRAServerUrlText.Size = new System.Drawing.Size(172, 20);
-            this.JIRAServerUrlText.TabIndex = 14;
-            // 
-            // PassTextBox
-            // 
-            this.PassTextBox.Location = new System.Drawing.Point(119, 84);
-            this.PassTextBox.Name = "PassTextBox";
-            this.PassTextBox.Size = new System.Drawing.Size(172, 20);
-            this.PassTextBox.TabIndex = 13;
+            this.JIRAServerUrlText.Size = new System.Drawing.Size(351, 20);
+            this.JIRAServerUrlText.TabIndex = 3;
+            this.JIRAServerUrlText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnter);
             // 
             // UserTextBox
             // 
-            this.UserTextBox.Location = new System.Drawing.Point(119, 57);
+            this.UserTextBox.Location = new System.Drawing.Point(6, 30);
             this.UserTextBox.Name = "UserTextBox";
-            this.UserTextBox.Size = new System.Drawing.Size(172, 20);
-            this.UserTextBox.TabIndex = 12;
-            // 
-            // PassLabel
-            // 
-            this.PassLabel.AutoSize = true;
-            this.PassLabel.Location = new System.Drawing.Point(3, 87);
-            this.PassLabel.Name = "PassLabel";
-            this.PassLabel.Size = new System.Drawing.Size(45, 13);
-            this.PassLabel.TabIndex = 11;
-            this.PassLabel.Text = "Пароль";
+            this.UserTextBox.Size = new System.Drawing.Size(348, 20);
+            this.UserTextBox.TabIndex = 1;
+            this.UserTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnter);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 60);
+            this.label3.Enabled = false;
+            this.label3.Location = new System.Drawing.Point(3, 10);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 13);
-            this.label3.TabIndex = 10;
+            this.label3.TabIndex = 100;
             this.label3.Text = "Пользователь";
+            // 
+            // RefreshProjectWorker
+            // 
+            this.RefreshProjectWorker.WorkerReportsProgress = true;
+            this.RefreshProjectWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.RefreshProjectWorker_DoWork);
             // 
             // ConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(318, 217);
+            this.ClientSize = new System.Drawing.Size(381, 261);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "ConfigForm";
@@ -177,11 +171,10 @@
         private System.Windows.Forms.ComboBox JiraProjectKeyList;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox PassTextBox;
         private System.Windows.Forms.TextBox UserTextBox;
-        private System.Windows.Forms.Label PassLabel;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox JIRAServerUrlText;
         private System.Windows.Forms.Label JIRAServerURLLabel;
+        private System.ComponentModel.BackgroundWorker RefreshProjectWorker;
     }
 }
